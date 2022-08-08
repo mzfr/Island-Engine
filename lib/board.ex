@@ -44,4 +44,16 @@ defmodule IslandsEngine.Board do
     get_coordinate(board, key)
     |> Coordinate.island
   end
+
+  def to_string(board) do
+    "%{" <> string_body(board) <> "}"
+  end
+
+  defp string_body(board) do
+    Enum.reduce(keys(), "", fn key, acc ->
+      coord = get_coordinate(board, key)
+      acc <> "#{key} => #{Coordinate.to_string(coord)},\n"
+    end)
+  end
+
 end
